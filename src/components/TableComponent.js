@@ -191,7 +191,7 @@ const TableComponent = ({
           </tr>
         </tbody>
       </Table>
-      <Button type="submit" class="btn btn-primary ms-2">
+      <Button type="submit" className="btn btn-primary ms-2 mb-2">
         Submit Timesheet
       </Button>
     </>
