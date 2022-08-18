@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import "./Component.css";
 
 const TableComponent = ({
@@ -11,10 +11,6 @@ const TableComponent = ({
   dateDataState,
 }) => {
   const [tableData, setTableData] = useState(dateDataState);
-
-  console.log(dateDataState);
-  console.log(tableData);
-
   const monthYear = `${Month}-${Year}`;
   const [countDays, setCountDays] = useState({
     billableDays: "",
@@ -30,23 +26,28 @@ const TableComponent = ({
 
   useEffect(() => {
     const billDays = tableData.filter(
-      (data) => data.status !== "Customer/Public Holiday"
+      (data) =>
+        data.status !== "Customer/Public Holiday" && data.status !== "Weekend"
     ).length;
-    const daysPresent = tableData.filter((data) => data.status === "Present")
+    const fullDayPresent = tableData.filter((data) => data.status === "Present")
       .length;
-    const daysLeave = tableData.filter((data) => data.status === "Leave")
+    const halfDay =
+      tableData.filter((data) => data.status === "Half Day").length / 2;
+    const daysPresent = fullDayPresent + halfDay;
+    const fullDayLeave = tableData.filter((data) => data.status === "Leave")
       .length;
+    const daysLeave = fullDayLeave + halfDay;
     const holDays = tableData.filter(
-      (data) => data.status === "Customer/Public Holiday"
+      (data) =>
+        data.status === "Customer/Public Holiday" || data.status === "Weekend"
     ).length;
     const dayOfHoliday = tableData
-      .filter((data) => data.status === "Leave")
+      .filter((data) => data.status === "Leave" || data.status === "Half Day")
       .map((elm) => {
         const elem = elm.date.slice(0, -5);
         return elem;
       })
       .join(",");
-    console.log(dayOfHoliday);
 
     setCountDays((prevState) => {
       return {
@@ -94,14 +95,17 @@ const TableComponent = ({
               className={
                 data.status === "Present"
                   ? "bg-light"
-                  : data.status === "Customer/Public Holiday"
+                  : data.status === "Weekend"
                   ? "bg-info"
                   : data.status === "Leave"
                   ? "bg-danger"
                   : data.status === "Half Day"
                   ? "bg-warning"
+                  : data.status === "Customer/Public Holiday"
+                  ? "bg-secondary"
                   : "bg-success"
               }
+              key={data.date}
             >
               <td fs-6>{data.date}</td>
               <td>{data.day}</td>
@@ -113,6 +117,7 @@ const TableComponent = ({
                   value={data.status}
                   onChange={(event) => handleChangeStatus(event, data)}
                 >
+                  <option>Weekend</option>
                   <option>Present</option>
                   <option>Customer/Public Holiday</option>
                   <option>Leave</option>
@@ -187,6 +192,9 @@ const TableComponent = ({
           </tr>
         </tbody>
       </Table>
+      <Button type="submit" class="btn btn-primary ms-2">
+        Submit Timesheet
+      </Button>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TableComponent from "./components/TableComponent";
 import { months, dateData } from "./staticData";
 import "./App.css";
@@ -15,12 +15,9 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowTables(true);
-    console.log(selectMonth);
-    console.log(selectYear);
     const filteredData = dateData.filter((data) =>
       data.date.includes(`${selectMonth}-${selectYear}`)
     );
-    console.log(filteredData);
     setDateDataState(filteredData);
   };
 
@@ -116,7 +113,13 @@ function App() {
             <label for="workHours" class="form-label mb-1">
               TOTAL WORKING HOURS IN A DAY
             </label>
-            <input type="number" class="form-control" id="workHours" required />
+            <input
+              type="number"
+              class="form-control"
+              id="workHours"
+              max={9}
+              required
+            />
           </div>
         </div>
         <div className="shadow-sm rounded row ms-auto me-auto mt-2 p-3 mt-4 bg-light border border-primary">
@@ -147,7 +150,7 @@ function App() {
             >
               <option>Select Month...</option>
               {months.map((month) => (
-                <option>{month}</option>
+                <option key={month}>{month}</option>
               ))}
             </select>
           </div>
