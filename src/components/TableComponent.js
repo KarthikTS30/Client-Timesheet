@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import "./Component.css";
-import { dateData } from "../staticData";
 
-const TableComponent = ({ Month, Year, psidValue, empName, managerName }) => {
-  const [tableData, setTableData] = useState(
-    dateData.filter((data) => data.date.includes(`${Month}-${Year}`))
-  );
+const TableComponent = ({
+  Month,
+  Year,
+  psidValue,
+  empName,
+  managerName,
+  dateDataState,
+}) => {
+  const [tableData, setTableData] = useState(dateDataState);
+
+  console.log(dateDataState);
+  console.log(tableData);
 
   const monthYear = `${Month}-${Year}`;
   const [countDays, setCountDays] = useState({
@@ -16,6 +23,10 @@ const TableComponent = ({ Month, Year, psidValue, empName, managerName }) => {
     noOfHolidays: "",
     daysOfHoliday: "",
   });
+
+  useEffect(() => {
+    setTableData(dateDataState);
+  }, [dateDataState]);
 
   useEffect(() => {
     const billDays = tableData.filter(

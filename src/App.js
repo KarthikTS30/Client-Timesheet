@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TableComponent from "./components/TableComponent";
-import { months } from "./staticData";
+import { months, dateData } from "./staticData";
 import "./App.css";
 
 function App() {
@@ -10,10 +10,18 @@ function App() {
   const [managerName, setManagerName] = useState();
   const [selectYear, setSelectYear] = useState();
   const [selectMonth, setSelectMonth] = useState();
+  const [dateDataState, setDateDataState] = useState(dateData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowTables(true);
+    console.log(selectMonth);
+    console.log(selectYear);
+    const filteredData = dateData.filter((data) =>
+      data.date.includes(`${selectMonth}-${selectYear}`)
+    );
+    console.log(filteredData);
+    setDateDataState(filteredData);
   };
 
   const handleInputChange = (event) => {
@@ -157,6 +165,7 @@ function App() {
           psidValue={psidValue}
           empName={empName}
           managerName={managerName}
+          dateDataState={dateDataState}
         />
       )}
     </div>
