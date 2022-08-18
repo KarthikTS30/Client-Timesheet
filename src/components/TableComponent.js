@@ -17,7 +17,7 @@ const TableComponent = ({
     noDaysPresent: "",
     noDaysLeave: "",
     noOfHolidays: "",
-    daysOfHoliday: "",
+    daysOfLeave: "",
   });
 
   useEffect(() => {
@@ -38,10 +38,9 @@ const TableComponent = ({
       .length;
     const daysLeave = fullDayLeave + halfDay;
     const holDays = tableData.filter(
-      (data) =>
-        data.status === "Customer/Public Holiday" || data.status === "Weekend"
+      (data) => data.status === "Customer/Public Holiday"
     ).length;
-    const dayOfHoliday = tableData
+    const dayOfLeave = tableData
       .filter((data) => data.status === "Leave" || data.status === "Half Day")
       .map((elm) => {
         const elem = elm.date.slice(0, -5);
@@ -56,7 +55,7 @@ const TableComponent = ({
         noDaysPresent: daysPresent,
         noDaysLeave: daysLeave,
         noOfHolidays: holDays,
-        daysOfHoliday: dayOfHoliday,
+        daysOfLeave: dayOfLeave,
       };
     });
   }, [tableData]);
@@ -188,7 +187,7 @@ const TableComponent = ({
             <td>{countDays.noDaysPresent}</td>
             <td>{countDays.noDaysLeave}</td>
             <td>{countDays.noOfHolidays}</td>
-            <td>{countDays.daysOfHoliday}</td>
+            <td>{countDays.daysOfLeave}</td>
           </tr>
         </tbody>
       </Table>
