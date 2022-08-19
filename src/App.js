@@ -8,6 +8,8 @@ function App() {
   const [psidValue, setPsidValue] = useState();
   const [empName, setEmpName] = useState();
   const [managerName, setManagerName] = useState();
+  const [emailId, setEmailId] = useState();
+  const [managerEmail, setManagerEmail] = useState();
   const [selectYear, setSelectYear] = useState();
   const [selectMonth, setSelectMonth] = useState();
   const [dateDataState, setDateDataState] = useState(dateData);
@@ -33,6 +35,12 @@ function App() {
     if (id === "guardianMgr") {
       setManagerName(value);
     }
+    if (id === "emailId") {
+      setEmailId(value);
+    }
+    if (id === "mgrEmail") {
+      setManagerEmail(value);
+    }
   };
 
   const handleChangeYear = (event) => {
@@ -54,9 +62,9 @@ function App() {
         </h2>
         <img src="guardianLogo.png" className="guardLogo" alt="guardAlt" />
       </div>
-      <form class="col g-3 ms-2 me-auto mb-2 w-75" onSubmit={handleSubmit}>
-        <div className="shadow-sm rounded row ms-auto me-auto mt-10 p-3 bg-light border border-primary ">
-          <div class="col-md-4">
+      <form class="col g-3 ms-4 me-4 mb-2 w-90" onSubmit={handleSubmit}>
+        <div className="shadow-sm rounded row mt-10 p-3 bg-light border border-primary ">
+          <div class="col-md-3">
             <label for="psid" class="form-label mb-1">
               PSID
             </label>
@@ -68,7 +76,7 @@ function App() {
               required
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="name" class="form-label mb-1">
               NAME
             </label>
@@ -80,13 +88,13 @@ function App() {
               required
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="doj" class="form-label mb-1">
               DATE OF JOINING
             </label>
             <input type="date" class="form-control" id="doj" required />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="workLocation" class="form-label mb-1">
               WORK LOCATION
             </label>
@@ -97,7 +105,7 @@ function App() {
               required
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="guardianMgr" class="form-label mb-1">
               GUARDIAN MANAGER
             </label>
@@ -109,7 +117,7 @@ function App() {
               required
             />
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label for="workHours" class="form-label mb-1">
               TOTAL WORKING HOURS IN A DAY
             </label>
@@ -121,8 +129,32 @@ function App() {
               required
             />
           </div>
+          <div class="col-md-3">
+            <label for="emailId" class="form-label mb-1">
+              EMAIL ID
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              id="emailId"
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="mgrEmail" class="form-label mb-1">
+              MANAGER/POC EMAIL ID
+            </label>
+            <input
+              type="email"
+              class="form-control"
+              id="mgrEmail"
+              onChange={handleInputChange}
+              required
+            />
+          </div>
         </div>
-        <div className="shadow-sm rounded row ms-auto me-auto mt-2 p-3 mt-4 bg-light border border-primary">
+        <div className="d-flex justify-content-space-evenly shadow-sm rounded row p-3 mt-2 mt-4 w-75 bg-light border border-primary">
           <div class="col-md-4">
             <select
               id="inputYear"
@@ -156,7 +188,7 @@ function App() {
           </div>
           <div class="col-md-4">
             <button type="submit" class="btn btn-primary">
-              Proceed to Enter Timesheet
+              Proceed to Enter Timesheet Details
             </button>
           </div>
         </div>
@@ -169,6 +201,8 @@ function App() {
           empName={empName}
           managerName={managerName}
           dateDataState={dateDataState}
+          emailId={emailId}
+          managerEmail={managerEmail}
         />
       )}
     </div>
