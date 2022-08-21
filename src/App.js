@@ -9,7 +9,7 @@ function App() {
   const [empName, setEmpName] = useState();
   const [managerName, setManagerName] = useState();
   const [emailId, setEmailId] = useState();
-  const [managerEmail, setManagerEmail] = useState();
+  // const [managerEmail, setManagerEmail] = useState();
   const [selectYear, setSelectYear] = useState();
   const [selectMonth, setSelectMonth] = useState();
   const [dateDataState, setDateDataState] = useState(dateData);
@@ -38,9 +38,9 @@ function App() {
     if (id === "emailId") {
       setEmailId(value);
     }
-    if (id === "mgrEmail") {
-      setManagerEmail(value);
-    }
+    // if (id === "mgrEmail") {
+    //   setManagerEmail(value);
+    // }
   };
 
   const handleChangeYear = (event) => {
@@ -125,7 +125,7 @@ function App() {
               type="number"
               class="form-control"
               id="workHours"
-              max={9}
+              max={10}
               required
             />
           </div>
@@ -141,7 +141,7 @@ function App() {
               required
             />
           </div>
-          <div class="col-md-3">
+          {/* <div class="col-md-3">
             <label for="mgrEmail" class="form-label mb-1">
               MANAGER/POC EMAIL ID
             </label>
@@ -152,7 +152,7 @@ function App() {
               onChange={handleInputChange}
               required
             />
-          </div>
+          </div> */}
         </div>
         <div className="d-flex justify-content-space-evenly shadow-sm rounded row p-3 mt-2 mt-4 w-75 bg-light border border-primary">
           <div class="col-md-4">
@@ -202,7 +202,8 @@ function App() {
           managerName={managerName}
           dateDataState={dateDataState}
           emailId={emailId}
-          managerEmail={managerEmail}
+          setShowTables={setShowTables}
+          // managerEmail={managerEmail}
         />
       )}
     </div>
